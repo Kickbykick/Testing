@@ -22,7 +22,7 @@ jobs:
           channel: "stable"
       
       - name: Run dart reporter
-        run: sh ./shell_scripts/dart_reporter.sh
+        run: sh ./dart_reporter.sh
 
       - run: flutter pub get
       - run: flutter analyze
