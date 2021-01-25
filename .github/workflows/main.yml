@@ -21,8 +21,11 @@ jobs:
         with:
           channel: "stable"
       
-      - name: Run dart reporter
+      - name: Run Dart Reporter
         run: sh ./dart_reporter.sh
+
+      - name: Run Cobertura 
+        run: sh ./cobertura.sh
 
       - run: flutter pub get
       - run: flutter analyze
