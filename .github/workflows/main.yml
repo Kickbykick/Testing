@@ -22,15 +22,15 @@ jobs:
           channel: "stable"
       
       - name: Run Dart Reporter
-        run: sh ./dart_reporter.sh
+        run: sh ./.github/shell_scripts/dart_reporter.sh
 
       - name: Run Cobertura 
-        run: sh ./cobertura.sh
+        run: sh ./.github/shell_scripts/cobertura.sh
 
       - name: Commit files
         run: |
           git config --local user.name "kickbykick"
-          git add .
+          git add ./coverage
           git commit -m "Adding the cobertura coverage file"
       - name: Push changes
         uses: ad-m/github-push-action@master
