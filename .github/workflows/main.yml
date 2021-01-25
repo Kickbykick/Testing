@@ -38,6 +38,12 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force: true
 
+      - uses: 5monkeys/cobertura-action@master
+        with:
+          path: ./coverage/coverage.xml
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          minimum_coverage: 75
+
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test
