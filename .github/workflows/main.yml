@@ -27,6 +27,17 @@ jobs:
       - name: Run Cobertura 
         run: sh ./cobertura.sh
 
+      - name: Commit files
+        run: |
+          git config --local user.name "kickbykick"
+          git add .
+          git commit -m "Adding the cobertura coverage file"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
+
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test
