@@ -4,7 +4,7 @@ on:
     branches: 
       - main
   pull_request:
-    types: [opened, synchronize, edited]
+    types: [opened, synchronize]
     branches:
       - main
 
@@ -20,6 +20,9 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
+
+      - name: Copy env example as env
+        run: cp ./.env.example ./.env;
       
       - name: Run Dart Reporter
         run: sh ./.github/shell_scripts/dart_reporter.sh
@@ -27,23 +30,24 @@ jobs:
       - name: Run Cobertura 
         run: sh ./.github/shell_scripts/cobertura.sh
 
-      - name: Commit files
-        run: |
-          git config --local user.name "kickbykick"
-          git add ./coverage
-          git commit -m "Adding the cobertura coverage file"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
+      # - name: Commit files
+      #   run: |
+      #     git config --local user.name "Ommaty-App"
+      #     git add ./coverage
+      #     git commit -m "Adding the cobertura coverage file"
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     force: true
 
       - uses: 5monkeys/cobertura-action@master
         with:
           path: ./coverage/coverage.xml
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          minimum_coverage: 75
+          minimum_coverage: 80
+          only_changed_files: true
 
       - run: flutter pub get
-      - run: flutter analyze
-      - run: flutter test
+      # - run: flutter analyze
+      # - run: flutter test
