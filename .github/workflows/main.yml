@@ -20,6 +20,9 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
+
+      - name: Copy env example as env
+        run: cp ./.env.example ./.env;
       
       - name: Run Dart Reporter
         run: sh ./.github/shell_scripts/dart_reporter.sh
@@ -45,5 +48,5 @@ jobs:
           minimum_coverage: 50
 
       - run: flutter pub get
-      - run: flutter analyze
-      - run: flutter test
+      # - run: flutter analyze
+      # - run: flutter test
