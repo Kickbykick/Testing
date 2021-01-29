@@ -45,7 +45,7 @@ jobs:
         with:
           path: ./coverage/coverage.xml
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          minimum_coverage: 50
+          minimum_coverage: 80
           only_changed_files: true
 
       - run: flutter pub get
